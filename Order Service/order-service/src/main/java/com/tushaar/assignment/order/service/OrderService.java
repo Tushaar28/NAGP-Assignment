@@ -24,6 +24,7 @@ public class OrderService {
 	private RestTemplate restTemplate;
 
 	public Object newOrder(Map<String, String> body) {
+		Long orderId = -1L;
 		try {
 		Order order = new Order();
 		order.setUserId(Long.parseLong(body.get("userId")));
@@ -33,10 +34,13 @@ public class OrderService {
 		order.setTime(body.get("time"));
 		order.setOrderStatus(status.PENDING);
 		order = _repository.save(order);
+		orderId = order.getOrderId();
 		Object response = restTemplate.postForObject("http://localhost:8080/publish/order", order, Object.class);
 		return new ResponseEntity<Object>("Order has been created with order id " + order.getOrderId(), new HttpHeaders(), HttpStatus.OK);
 		}
 		catch(Exception e) {
+			if(_repository.existsById(orderId))
+				_repository.deleteById(orderId);
 			System.out.println(e);
 			return new ResponseEntity<Object>("Unable to create order", new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
