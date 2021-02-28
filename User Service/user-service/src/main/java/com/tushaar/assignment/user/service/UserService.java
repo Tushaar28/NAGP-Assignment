@@ -47,14 +47,14 @@ public class UserService {
 		return response;
 	}
 
-	public Object notifyApprove(Long orderId, String workerId) {
+	public void notifyApprove(Long orderId, String workerId) {
 		System.out.println("Your order with order id " + orderId + " has been approved and assigned to worker with id " + workerId);
-		return new ResponseEntity<Object>("Your order with order id " + orderId + " has been approved and assigned to worker with id " + workerId, new HttpHeaders(), HttpStatus.OK);
+		//return new ResponseEntity<Object>("Your order with order id " + orderId + " has been approved and assigned to worker with id " + workerId, new HttpHeaders(), HttpStatus.OK);
 	}
 	
-	public Object notifyReject(Long orderId) {
+	public void notifyReject(Long orderId) {
 		System.out.println("Your order with order id " + orderId + " has been rejected");
-		return new ResponseEntity<Object>("Your order with order id " + orderId + " has been rejected", new HttpHeaders(), HttpStatus.OK);
+		//return new ResponseEntity<Object>("Your order with order id " + orderId + " has been rejected", new HttpHeaders(), HttpStatus.OK);
 	}
 
 }

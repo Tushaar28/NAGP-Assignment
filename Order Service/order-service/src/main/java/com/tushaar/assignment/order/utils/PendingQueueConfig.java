@@ -15,12 +15,4 @@ public class PendingQueueConfig {
 	public Queue pendingQueue() {
 		return new ActiveMQQueue("pending_queue");
 	}
-	
-	@Bean
-	public ActiveMQConnectionFactory connectionfactory() {
-		ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory();
-		factory.setBrokerURL("tcp://localhost:61616");
-		return factory;
-	}
-
 }

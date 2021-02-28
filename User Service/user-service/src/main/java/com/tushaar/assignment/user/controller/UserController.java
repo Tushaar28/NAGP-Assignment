@@ -39,13 +39,15 @@ public class UserController {
 	}
 	
 	@PostMapping("/approve/{id}")
-	public Object notifyApprove(@PathVariable("id") Long orderId, @RequestBody String workerId) {
-		return _service.notifyApprove(orderId, workerId);
+	public void notifyApprove(@PathVariable("id") Long orderId, @RequestBody String workerId) {
+		_service.notifyApprove(orderId, workerId);
+		return;
 	}
 	
 	@GetMapping("/reject/{id}")
-	public Object notifyReject(@PathVariable("id") Long orderId) {
+	public void notifyReject(@PathVariable("id") Long orderId) {
 		//return "Your order with order id " + orderId + " has been rejected";
-		return _service.notifyReject(orderId);
+		_service.notifyReject(orderId);
+		return;
 	}
 }
