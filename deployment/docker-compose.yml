@@ -1,0 +1,76 @@
+version: "3"
+
+services:
+    discovery-server:
+        container_name: discovery-server
+        image: tushaar28/service-registry:2
+        ports:
+                - "8761:8761"
+        volumes:
+                - /tmp:/workspace/logs
+    queue-service:
+        container_name: queue-service
+        image: tushaar28/queue-service:2
+        ports:
+                - "8080:8080"
+        links:
+            - discovery-server:discovery-server
+        environment:
+                - EUREKA_URI=http://discovery-server:8761/eureka
+        volumes:
+                - /tmp:/workspace/logs
+    api-gateway:
+        container_name: api-gateway
+        image: tushaar28/api-gateway:2
+        ports:
+                - "9000:9000"
+        links:
+                - discovery-server:discovery-server
+        environment:
+                - EUREKA_URI=http://discovery-server:8761/eureka
+        volumes:
+                - /tmp:/workspace/logs
+    user-service:
+        container_name: user-service
+        image: tushaar28/user-service:2
+        ports:
+                - "8082:8082"
+        links:
+            - discovery-server:discovery-server
+        environment:
+                - EUREKA_URI=http://discovery-server:8761/eureka
+        volumes:
+                - /tmp:/workspace/logs
+    order-service:
+        container_name: order-service
+        image: tushaar28/order-service:2
+        ports:
+                - "8081:8081"
+        links:
+            - discovery-server:discovery-server
+        environment:
+                - EUREKA_URI=http://discovery-server:8761/eureka
+        volumes:
+                - /tmp:/workspace/logs
+    admin-service:
+        container_name: admin-service
+        image: tushaar28/admin-service:2
+        ports:
+                - "8087:8087"
+        links:
+            - discovery-server:discovery-server
+        environment:
+                - EUREKA_URI=http://discovery-server:8761/eureka
+        volumes:
+                - /tmp:/workspace/logs
+    worker-service:
+        container_name: worker-service
+        image: tushaar28/worker-service:2
+        ports:
+                - "8088:8088"
+        links:
+            - discovery-server:discovery-server
+        environment:
+                - EUREKA_URI=http://discovery-server:8761/eureka
+        volumes:
+                - /tmp:/workspace/logs
