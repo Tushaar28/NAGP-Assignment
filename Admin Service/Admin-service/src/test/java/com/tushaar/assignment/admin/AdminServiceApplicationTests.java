@@ -1,10 +1,10 @@
-package com.tushaar.assignment.apigateway;
+package com.tushaar.assignment.admin;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DemoApplicationTests {
+class AdminServiceApplicationTests {
 
 	@Test
 	void contextLoads() {

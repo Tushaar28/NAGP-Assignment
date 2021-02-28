@@ -1,4 +1,4 @@
-package com.tushaar.assignment.user.reporsitory;
+package com.tushaar.assignment.user.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -1,5 +1,6 @@
 package com.tushaar.assignment.order.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,18 +23,20 @@ public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long orderId;
-	
+	@Column(nullable = false)
 	private Long userId;
-	
+	@Column(nullable = false)
 	private String name;
-	
+	@Column(nullable = false)
 	private String address;
-	
+	@Column(nullable = false)
 	private String type;
-	
+	@Column(nullable = false)
 	private String time;
-	
+	@Column(nullable = false)
 	private status orderStatus;
+	@Column(nullable = true)
+	private Long workerId;
 
 	public Long getOrderId() {
 		return orderId;
@@ -87,10 +90,17 @@ public class Order {
 		this.orderStatus = orderStatus;
 	}
 
+	public Long getWorkerId() {
+		return workerId;
+	}
+
+	public void setWorkerId(Long workerId) {
+		this.workerId = workerId;
+	}
+
 	@Override
 	public String toString() {
 		return "Order [orderId=" + orderId + ", userId=" + userId + ", name=" + name + ", address=" + address
-				+ ", type=" + type + ", time=" + time + ", orderStatus=" + orderStatus + "]";
+				+ ", type=" + type + ", time=" + time + ", orderStatus=" + orderStatus + ", workerId=" + workerId + "]";
 	}
-	
 }

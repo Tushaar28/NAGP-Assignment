@@ -3,13 +3,16 @@ package com.tushaar.assignment.user.service;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.tushaar.assignment.user.VO.OrderRequestTemplate;
 import com.tushaar.assignment.user.VO.OrderResponseTemplate;
 import com.tushaar.assignment.user.model.User;
-import com.tushaar.assignment.user.reporsitory.UserRepository;
+import com.tushaar.assignment.user.repository.UserRepository;
 
 @Service
 public class UserService {
@@ -42,6 +45,16 @@ public class UserService {
 		OrderResponseTemplate response = 
 				_restTemplate.postForObject("http://localhot:8081/orders/new", orderRequest, OrderResponseTemplate.class);
 		return response;
+	}
+
+	public Object notifyApprove(Long orderId, String workerId) {
+		System.out.println("Your order with order id " + orderId + " has been approved and assigned to worker with id " + workerId);
+		return new ResponseEntity<Object>("Your order with order id " + orderId + " has been approved and assigned to worker with id " + workerId, new HttpHeaders(), HttpStatus.OK);
+	}
+	
+	public Object notifyReject(Long orderId) {
+		System.out.println("Your order with order id " + orderId + " has been rejected");
+		return new ResponseEntity<Object>("Your order with order id " + orderId + " has been rejected", new HttpHeaders(), HttpStatus.OK);
 	}
 
 }
