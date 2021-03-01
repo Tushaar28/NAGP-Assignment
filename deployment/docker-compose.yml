@@ -19,17 +19,6 @@ services:
                 - EUREKA_URI=http://discovery-server:8761/eureka
         volumes:
                 - /tmp:/workspace/logs
-    api-gateway:
-        container_name: api-gateway
-        image: tushaar28/api-gateway:2
-        ports:
-                - "9000:9000"
-        links:
-                - discovery-server:discovery-server
-        environment:
-                - EUREKA_URI=http://discovery-server:8761/eureka
-        volumes:
-                - /tmp:/workspace/logs
     user-service:
         container_name: user-service
         image: tushaar28/user-service:2
@@ -68,6 +57,17 @@ services:
         image: tushaar28/worker-service:2
         ports:
                 - "8088:8088"
+        links:
+            - discovery-server:discovery-server
+        environment:
+                - EUREKA_URI=http://discovery-server:8761/eureka
+        volumes:
+                - /tmp:/workspace/logs
+    api-gateway:
+        container_name: api-gateway
+        image: tushaar28/api-gateway:4
+        ports:
+                - "9000:9000"
         links:
             - discovery-server:discovery-server
         environment:
